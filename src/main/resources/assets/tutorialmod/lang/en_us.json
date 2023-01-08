@@ -1,0 +1,12 @@
+{
+  "itemGroup.tutorialModTab": "Duzo Epic Mod",
+  "tooltip.tutorialmod.default": "Hold \u00a7eSHIFT§r for extra Information",
+  "item.tutorialmod.amongus": "Among Us",
+  "item.tutorialmod.firestone": "FIRE AMONGUS",
+  "tooltip.tutorialmod.firestone": "50% Chance to work (by choice btw), use on certain blocks and among us block for superpowers use on everything else for FIRE",
+  "block.tutorialmod.amongus_ore": "AMONG US ore",
+  "block.tutorialmod.amongus_block": "AMONG US BLOCKL?!",
+  "block.tutorialmod.amongus_stairs": "AMONGUS STAirs",
+  "block.tutorialmod.lightning_channeler": "zap block",
+  "screen.tutorialmod.lightning_channeler": "zap block ( lightning channeler)"
+}
