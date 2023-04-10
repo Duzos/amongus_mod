@@ -18,30 +18,17 @@ import net.minecraftforge.items.ItemStackHandler;
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
 
-public class LightningChannelerTile extends TileEntity {
+public class PlayerMonitorTile extends TileEntity {
 
     private final ItemStackHandler itemHandler = createHandler();
     private final LazyOptional<IItemHandler> handler = LazyOptional.of(() -> itemHandler);
 
-    public LightningChannelerTile(TileEntityType<?> tileEntityType) {
+    public PlayerMonitorTile(TileEntityType<?> tileEntityType) {
         super(tileEntityType);
     }
 
-    public LightningChannelerTile() {
-        this(ModTileEntities.LIGHTNING_CHANNELER_TILE.get());
-    }
-
-    @Override
-    public void read(BlockState state, CompoundNBT nbt) {
-        itemHandler.deserializeNBT(nbt.getCompound("inv"));
-        super.read(state, nbt);
-    }
-
-
-    @Override
-    public CompoundNBT write(CompoundNBT compound) {
-        compound.put("inv", itemHandler.serializeNBT());
-        return super.write(compound);
+    public PlayerMonitorTile() {
+        this(ModTileEntities.PLAYER_MONITOR_TILE.get());
     }
 
     private ItemStackHandler createHandler() {
@@ -53,12 +40,7 @@ public class LightningChannelerTile extends TileEntity {
 
             @Override
             public boolean isItemValid(int slot, @Nonnull ItemStack stack) {
-                switch(slot) {
-                    case 0: return stack.getItem() == Items.GLASS_PANE;
-                    case 1: return stack.getItem() == ModItems.AMONGUS.get() || stack.getItem() == ModItems.FIRESTONE.get();
-                    default:
-                        return false;
-                }
+                return true;
             }
 
             @Override
@@ -77,6 +59,19 @@ public class LightningChannelerTile extends TileEntity {
         };
     }
 
+    @Override
+    public void read(BlockState state, CompoundNBT nbt) {
+        itemHandler.deserializeNBT(nbt.getCompound("data"));
+        super.read(state, nbt);
+    }
+
+    @Override
+    public CompoundNBT write(CompoundNBT compound) {
+        compound.put("data", itemHandler.serializeNBT());
+        return super.write(compound);
+    }
+
+
     @Nonnull
     @Override
     public <T> LazyOptional<T> getCapability(@Nonnull Capability<T> cap, @Nullable Direction side) {
@@ -84,17 +79,5 @@ public class LightningChannelerTile extends TileEntity {
             return handler.cast();
         }
         return super.getCapability(cap, side);
-    }
-
-    public void lightningHasStruck() {
-        boolean hasFocusInFirstSlot = this.itemHandler.getStackInSlot(0).getCount() > 0 && this.itemHandler.getStackInSlot(0).getItem() == Items.GLASS_PANE;
-        boolean hasAmongusInSecondSlot = this.itemHandler.getStackInSlot(1).getCount() > 0 && this.itemHandler.getStackInSlot(1).getItem() == ModItems.AMONGUS.get();
-
-        if (hasFocusInFirstSlot && hasAmongusInSecondSlot) {
-            this.itemHandler.getStackInSlot(0).shrink(1);
-            this.itemHandler.getStackInSlot(1).shrink(1);
-
-            this.itemHandler.insertItem(1, new ItemStack(ModItems.FIRESTONE.get()),false);
-        }
     }
 }

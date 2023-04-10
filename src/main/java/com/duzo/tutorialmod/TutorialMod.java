@@ -4,6 +4,7 @@ import com.duzo.tutorialmod.block.ModBlocks;
 import com.duzo.tutorialmod.container.ModContainers;
 import com.duzo.tutorialmod.item.ModItems;
 import com.duzo.tutorialmod.screen.LightningChannelerScreen;
+import com.duzo.tutorialmod.screen.PlayerMonitorScreen;
 import com.duzo.tutorialmod.tileentity.ModTileEntities;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
@@ -66,6 +67,7 @@ public class TutorialMod
     private void doClientStuff(final FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
             ScreenManager.registerFactory(ModContainers.LIGHTNING_CHANNELER_CONTAINER.get(), LightningChannelerScreen::new);
+//            ScreenManager.registerFactory(ModContainers.PLAYER_MONITOR_CONTAINER.get(), PlayerMonitorScreen::new);
         });
     }
 

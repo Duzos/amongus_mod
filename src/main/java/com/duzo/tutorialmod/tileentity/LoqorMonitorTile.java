@@ -27,9 +27,9 @@ public class LoqorMonitorTile extends TileEntity {
         super(tileEntityType);
     }
 
-    public LoqorMonitorTile() {
-        this(ModTileEntities.LOQOR_MONITOR_TILE.get());
-    }
+//    public LoqorMonitorTile() {
+//        this(ModTileEntities.LOQOR_MONITOR_TILE.get());
+//    }
 
     private ItemStackHandler createHandler() {
         return new ItemStackHandler(2){
